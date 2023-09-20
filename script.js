@@ -15,11 +15,7 @@ function getComputerChoice() {
   
   // Exemple d'utilisation de la fonction
   const computerSelection = getComputerChoice();
-  function Capitalize(player) {
-    player=player.toLowerCase();
-    player=player.charAt(0).toUpperCase()+player.slice(1);
-    return player;
-  }
+  
   var playerresult =0;
   var computerresult=0;
   function playRound(playerSelection, computerSelection) {
@@ -70,28 +66,75 @@ function getComputerChoice() {
         return "Erreur !! Essaye again"
     }
   }
- 
- 
- 
-  function game(){
-    for(let i=0; i<5;i++)
+  const body = document.querySelector('body');
+  body.style.cssText="background-color:#986453";
+  
+  const container = document.querySelector('#container');
+  const content = document.createElement('div');
+content.classList.add('content');
+content.style.cssText = "background-color:black; color:white;";
+
+const p = document.createElement('p');
+p.style.cssText= "color:green;";
+
+function resultatfinal(){
+  if(playerresult==5 &&computerresult==5)
     {
-    const Player = prompt("CHOICE Rock , Paper or Scissors :");
-    const playerSelection=Capitalize(Player);
-    console.log(playRound(playerSelection, computerSelection));
-    console.log(`Résultat : <Player> ${playerresult} - <Computer> ${computerresult}`);
+      content.textContent=`Résultat : <Player> ${playerresult} - <Computer> ${computerresult}`;;
+      computerresult=0;
+      playerresult=0;
+      p.textContent="Tie !!";
     }
-    if(playerresult==computerresult)
+    else if(playerresult==5 &&computerresult<5)
     {
-      alert("Tie !!");
+      content.textContent=`Résultat : <Player> ${playerresult} - <Computer> ${computerresult}`;;
+      computerresult=0;
+      playerresult=0;
+      p.textContent="Congratulations, you won !";
     }
-    else if(playerresult>computerresult)
+    else if(playerresult<5 &&computerresult==5)
     {
-      alert("Congratulations, you won !");
+      content.textContent=`Résultat : <Player> ${playerresult} - <Computer> ${computerresult}`;;
+      computerresult=0;
+      playerresult=0;
+      p.textContent="You Lose !!";
     }
-    else
-    {
-      alert("You Lose !!");
-    }
-  }
-  game();
+}
+
+  const btn1 = document.querySelector('#Rock');
+  btn1.style.cssText="background-color:red; padding:36px; padding-left:62px; color:white;";
+btn1.addEventListener('click', () => {
+  const playerSelection="Rock";
+
+  content.textContent = playRound(playerSelection, computerSelection);
+  container.appendChild(content);
+  
+  p.textContent = `Résultat : <Player> ${playerresult} - <Computer> ${computerresult}`;
+  container.appendChild(p);
+  resultatfinal();
+});
+
+const btn2 = document.querySelector('#Paper');
+btn2.style.cssText="background-color:black; padding:36px; padding-left:62px; color:white;";
+btn2.addEventListener('click', () => {
+  const playerSelection="Paper";
+  content.textContent = playRound(playerSelection, computerSelection);
+  container.appendChild(content);
+  
+  p.textContent = `Résultat : <Player> ${playerresult} - <Computer> ${computerresult}`;
+  container.appendChild(p);
+  resultatfinal();
+});
+
+const btn3 = document.querySelector('#Scissors');
+btn3.style.cssText="background-color:pink; padding:36px; padding-left:62px; color:white;";
+btn3.addEventListener('click', () => {
+  const playerSelection="Scissors";
+  content.textContent = playRound(playerSelection, computerSelection);
+  container.appendChild(content);
+  
+  p.textContent = `Résultat : <Player> ${playerresult} - <Computer> ${computerresult}`;
+  container.appendChild(p);
+  resultatfinal();
+});
+
